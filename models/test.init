@@ -1,0 +1,32 @@
+Lammps init file written by MDPython after 99999
+
+3 atoms
+2 atom types
+2 bonds
+1 bond types
+
+-50.0 50.0 xlo xhi
+-50.0 50.0 ylo yhi
+-50.0 50.0 zlo zhi
+
+Masses
+
+1 15.999
+2 1.008
+
+Atoms # full style: index type group charge x y z
+1 1 1 0 -0.197833483377 0.0 -0.496941121005
+2 1 1 0 0.34828822418 0.0 0.599547916512
+3 1 1 0 0.778945259203 0.0 0.656993204477
+
+Velocities # vx vy vz
+
+1 0.123203730693 0.0 0.238739794528
+2 -0.0430190478487 0.0 -0.217105901949
+3 -0.0801846828446 0.0 -0.0216338925782
+
+Bonds # type i j
+
+1 1 1 2
+2 1 1 3
+

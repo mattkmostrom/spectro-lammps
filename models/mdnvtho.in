@@ -1,0 +1,40 @@
+#inputfile for mdlammps.py
+
+units lj
+atom_style full
+timestep 0.05
+
+read_data  morse.init
+
+pair_style lj/cut 3
+pair_coeff 1 1 1 1  # W W
+pair_coeff 1 2 1 1  # W C
+pair_coeff 2 2 1 1  # C C#
+
+bond_style  harmonic
+bond_coeff 1 2.2 1.5 # V r0
+#bond_coeff 2 1.2 2.5 # V r0
+
+#bond_style morse
+#bond_coeff 1 1.5 0.75 1.5 # D alpha r0
+#bond_coeff 2 1.5 0.75 2.0 # D alpha r0
+
+dump output all atom 10 ho.xyz
+dump_modify output scale no sort id image yes
+
+log honvt.log
+#inm hoinm.dat 100
+
+#fix lm all momentum 100 linear 1 1 1
+#fix vvnve all nve
+fix nvtnhc all nvt temp 1.1 1.1 0.5 tchain 3
+fix_modify nvtnhc energy yes
+#fix nvtnhc all nvt 1.1 1.1 0.1 # nvt Tstart Tend Tdamp (time units)
+
+thermo_style custom elapsed temp etotal ke pe evdwl ebond f_nvtnhc
+thermo 100
+
+run 100000
+
+write_data test.init
+

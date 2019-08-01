@@ -1,0 +1,33 @@
+# some global params
+units lj
+atom_style full #bonds, bends, torsions, etc
+timestep 0.010000 # femtoseconds (1e-15 s)
+
+# the atoms file
+read_data water_pair.xyz
+
+# methods for potential/force calculations
+pair_style      lj/cut 3
+
+#pair_characterization eps sigma cut_1 cut_2
+pair_coeff 2 2 0 3.428 #H-H sigma = r_min-i+r_min-j 
+pair_coeff 1 2 0 3.3 #O-H Mixing rules were RMS 
+pair_coeff 1 1 0.15543 3.165 #O-O http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.460.309&rep=rep1&type=pdf 
+
+#bond_coeff N args
+bond_style harmonic
+bond_coeff 1 1059.162 1.012
+bond_coeff 2 75.90 1.6901
+
+dump traj all xyz 10 ho.xyz
+
+thermo_style custom elapsed temp etotal ke pe evdwl ebond
+thermo 10
+
+log SPC.log
+
+inm SPC_INM.dat 10
+
+fix nve all nvt 298 298 0.1
+
+run 500000
