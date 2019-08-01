@@ -212,8 +212,7 @@ else:
         histdat[i][0] = (histedge[i]+histedge[i+1])/2
         histdat[i][1] = histo[i]
         #print(histo,histedge,histdat)
-    head = "Histogram of eigenvalues " + sys.argv[0] + " " + str(len(eig_array))
-    np.savetxt(inmfile,(histdat),header=head,fmt="%g")
+    np.savetxt(inmfile,(histdat),fmt="%g")
 
 print("Done!")
 exit(0)

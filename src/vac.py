@@ -69,17 +69,16 @@ v2 = vac[0]
 vac /= vac[0] # set initial value to 1
 
 inter = numpy.zeros(len(vac)) 
-#for i in range(len(vac)): # Linear interpolation to zero
+
+# Linear interpolation to zero
+#for i in range(len(vac)): 
 #    inter[i] = float(vac[0]*(1.-(i/float(len(vac)))))
 #    vac[i] = vac[i]*inter[i]
 
-for i in range(len(vac)): # Exponential interpolation to zero
-    inter[i] = float(vac[0]*(numpy.exp(-(0.0089*i))))
-    vac[i] = vac[i]*inter[i]
-
-print("")
-print("Thing: ",inter)
-print("")
+# Exponential interpolation to zero
+for i in range(len(vac)): 
+    inter[i] = float(vac[0]*(numpy.exp(-(0.0089*i)))) #This alpha assumes window
+    vac[i] = vac[i]*inter[i]                          #of 1024
 
 print("Writing vac.dat")
 file = open("vac.dat","w")
