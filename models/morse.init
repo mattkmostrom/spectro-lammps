@@ -17,7 +17,7 @@ Masses
 Atoms # full index type group charge x y z nx ny nz
 
 1 1 1 0    0     0   0 
-2 2 1 0  1.2   1.2   0
+2 2 1 0  XXX   XXX   0
 
 Velocities
 

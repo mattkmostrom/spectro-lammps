@@ -1,16 +1,17 @@
 #!/bin/bash
 
-rm *.dat
+rm -rf screening
+mkdir screening
+cd screening
+
 #for m in morse harmonic; do
 for m in morse; do
 
-
 	rm -rf $m
 	mkdir $m
-	cp *.py $m
-	cp ${m}.in $m
-	cp morse.init $m
-	cp moment.py $m
+	cp ../src/*.py $m
+	cp ../models/${m}.in $m
+	cp ../models/morse.init $m
   cd $m
 
 	for n in 1.2 1.3 1.4 1.5 1.6; do
@@ -23,8 +24,7 @@ for m in morse; do
 		cd $n
 		python mdlammps.py ${m}.in
 		python vac.py vel.dat vac.dat
-		#python moment.py
-		#mv moment.dat ${m}_${n}_moment.dat
+		python moment.py
     cd ..	
 		
     echo ""
@@ -40,7 +40,5 @@ echo "# distance, first, and second moments" >> head.tmp
 cat foot.dat >> head.tmp
 mv head.tmp moment.dat
 
-a=""; for x in $(ls */*/dct.dat); do a=$a" "$x; done; 
-b=""; for x in $(ls */*/*eig.dat); do b=$b" "$x; done;  
-xmgrace $a;
-xmgrace $b;
+a=""; for x in $(ls */*/dct.dat); do a=$a" "$x; done; xmgrace $a; 
+b=""; for x in $(ls */*/*eig.dat); do b=$b" "$x; done; xmgrace $b;
