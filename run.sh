@@ -4,41 +4,34 @@ rm -rf screening
 mkdir screening
 cd screening
 
-#for m in morse harmonic; do
-for m in morse; do
+for m in morse harmonic; do
+#for m in morse; do
 
 	rm -rf $m
 	mkdir $m
-	cp ../src/*.py $m
-	cp ../models/${m}.in $m
-	cp ../models/morse.init $m
-  cd $m
-
-	for n in 1.2 1.3 1.4 1.5 1.6; do
-
-		rm -rf $n
-		mkdir $n
-		cat morse.init | sed "s/XXX/$n/g" > $n/morse.init
-		cp *.py $n
-		cp ${m}.in $n
-		cd $n
-		python mdlammps.py ${m}.in
-		python vac.py vel.dat vac.dat
-		python moment.py
-    cd ..	
-		
+	                               #Starting in home directory
+  cd $m                          #Model Directory
+	for n in 1.0 1.1 1.2 1.3 1.4 1.5; do 
+    mkdir $n
+    cd $n
+    for v in 0.5 1.0 1.5 2.0; do      
+                                 #Temp directory
+      mkdir $v                   #Angular directory
+        cd $v
+        cp ../../../../src/*.py .
+        cp ../../../../models/${m}.in .
+        cat ../../../../models/morse.init | sed "s/XXX/$n/g" > tmp.init
+        cat tmp.init | sed "s/YYY/$v/g" > morse.init; rm tmp.init        
+        python mdlammps.py ${m}.in
+        python vac.py vel.dat vac.dat
+        cd ..	                  #Back to temp
+      echo "done with ${m}_${n}_${v}"
+    done
     echo ""
-		echo "done with $n"
-		echo ""	
-		cat ${n}/moment.dat | sed "s/XXX/$n/g" >> ../foot.dat
-    	
+    cd ..                       #Back to Model
   done
-	cd ..
+	cd ..                         #Back to home
 done
 
-echo "# distance, first, and second moments" >> head.tmp
-cat foot.dat >> head.tmp
-mv head.tmp moment.dat
-
-a=""; for x in $(ls */*/dct.dat); do a=$a" "$x; done; xmgrace $a; 
-b=""; for x in $(ls */*/*eig.dat); do b=$b" "$x; done; xmgrace $b;
+a=""; for x in $(ls screening/*/*/*/dct.dat); do a=$a" "$x; done; xmgrace $a; 
+b=""; for x in $(ls screening/*/*/*/*eig.dat); do b=$b" "$x; done; xmgrace $b;
