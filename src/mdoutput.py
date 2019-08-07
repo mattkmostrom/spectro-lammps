@@ -45,7 +45,7 @@ def write_thermo(logfile,istep,natoms,masses,pos,vel,pot):
 
     ke = .5*numpy.sum(masses*vel*vel)
     tpot = numpy.sum(pot)
-    temp = 2.0*ke/(3.0*natoms)
+    temp = 2.0*ke/(3.0*natoms-3)
 
     if(logfile==None):
         if(istep==0):
