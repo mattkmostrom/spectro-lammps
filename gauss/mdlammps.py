@@ -151,7 +151,7 @@ for istep in range(1,nsteps+1):
     if(istep%inmo==0): # get instantaneous normal modes
         hessian = mdbond.inm(bond_style,nbonds,bonds,bondcoeff,pos,masses)
 
-        # print(hessian)
+        print(hessian)
         w,v = np.linalg.eig(hessian)
         # remove 3 lowest eigegvalues (translations of entire system hopefully)
         for i in range(3): # Be careful and make sure the eigenvector is translation

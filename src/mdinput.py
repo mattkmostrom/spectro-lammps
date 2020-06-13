@@ -215,7 +215,6 @@ sysvals_lst = ['dt', 'initfile', 'bond_style', 'idump', 'dumpfile', 'ithermo', '
 
 
 def readsysvals(infile):
-    print(infile)
     with open(infile, 'r') as f:
         data = [-1] * 10
         bondcoeff = []
@@ -223,9 +222,6 @@ def readsysvals(infile):
         line = f.readline()
         while line:
             key, match = parse_line(line, re_dict_sysvals)
-            print(line)
-            print(key)
-            print(match)
             if match:
                 val = match.group(key)
             if key == 'nsteps':

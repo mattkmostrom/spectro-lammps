@@ -2,7 +2,7 @@
 
 units lj
 atom_style full
-timestep 0.05
+timestep 0.5
 
 read_data  LJ.init
 
@@ -12,7 +12,7 @@ pair_coeff 1 2 1 1  # W C
 pair_coeff 2 2 1 1  # C C#
 
 bond_style lennardjones
-bond_coeff 2 1.2 3.4 3.8 # epsilon sigma r0
+bond_coeff 2 .0012 3.4 3.8 # epsilon sigma r0
 
 dump traj all xyz 10 morse.xyz
 #dump traj all atom 10 ho.lammpstrj
@@ -23,8 +23,8 @@ thermo_style custom elapsed temp etotal ke pe evdwl ebond
 thermo 10
 log morse.log
 
-inm morse.eig.dat 10
+inm morse.eig.dat 10000
 
-fix vvnve all nve #t temp 10 10 1
+fix vvnve all nvt t 10 10 1
 
 run 100000

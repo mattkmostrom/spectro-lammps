@@ -46,7 +46,7 @@ def bond_force(bond_style, nbonds, bonds, bondcoeff, pos, acc, masses):
             r0 = bondcoeff[itype][2]
             dr = r - r0
             pot = 4 * eps * (((sig / r) ** 12) - ((sig / r) ** 6))
-            dudr = 24 * (eps / r) * (2 * ((eps / r) ** 12) - ((eps / r) ** 12))
+            dudr = -24 * (eps / r) * (2 * ((eps / r) ** 12) - ((eps / r) ** 12))
             F = (dudr / r) * rv
 
         else:
@@ -100,7 +100,7 @@ def inm(bond_style, nbonds, bonds, bondcoeff, pos, masses):
             r0 = bondcoeff[itype][2]
             dr = r - r0
             pot = 4 * eps * (((sig / r) ** 12) - ((sig / r) ** 6))
-            dudr = 24 * (eps / r) * (2 * ((eps / r) ** 12) - ((eps / r) ** 12))
+            dudr = -24 * (eps / r) * (2 * ((eps / r) ** 12) - ((eps / r) ** 12))
             F = (dudr / r) * rv
             du2dr2 = (24*eps*sig**6*(-7*r**6 + 26*sig**6))/r**14
  
