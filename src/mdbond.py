@@ -43,7 +43,11 @@ def bond_force(bond_style, nbonds, bonds, bondcoeff, pos, acc, masses):
         elif bond_style == 2:  # Lennard-Jones
             eps = bondcoeff[itype][0]
             sig = bondcoeff[itype][1]
+            r0 = bondcoeff[itype][2]
+            dr = r - r0
             pot = 4 * eps * (((sig / r) ** 12) - ((sig / r) ** 6))
+            dudr = 24 * (eps / r) * (2 * ((eps / r) ** 12) - ((eps / r) ** 12))
+            F = (dudr / r) * rv
 
         else:
             print("Error in bond_style? in routine bond_force\n")
@@ -89,6 +93,17 @@ def inm(bond_style, nbonds, bonds, bondcoeff, pos, masses):
             expar = math.exp(-alpha * dr)
             dudr = 2.0 * D * alpha * expar * (1.0 - expar)
             du2dr2 = (2.0 * D * alpha * alpha) * (2 * expar * expar - expar)
+
+        if bond_style == 2:  # Lennard-Jones
+            eps = bondcoeff[itype][0]
+            sig = bondcoeff[itype][1]
+            r0 = bondcoeff[itype][2]
+            dr = r - r0
+            pot = 4 * eps * (((sig / r) ** 12) - ((sig / r) ** 6))
+            dudr = 24 * (eps / r) * (2 * ((eps / r) ** 12) - ((eps / r) ** 12))
+            F = (dudr / r) * rv
+            du2dr2 = (24*eps*sig**6*(-7*r**6 + 26*sig**6))/r**14
+ 
 
         for k in range(3):  # populate upper half of hessian
             diagelm = dudr / r

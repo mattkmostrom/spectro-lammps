@@ -258,12 +258,12 @@ def readsysvals(infile):
                     for i in range(tbonds):
                         line = f.readline()
                         bondcoeff.append([float(line.split()[j + 2]) for j in range(3)])
-                elif re.search('lennard-jones', val, flags=re.IGNORECASE):
+                elif re.search('lennardjones', val, flags=re.IGNORECASE):
                     bond_style = 2
                     print('Reading in morse bond coefficients for', tbonds, 'types')
                     for i in range(tbonds):
                         line = f.readline()
-                        bondcoeff.append([float(line.split()[j + 2]) for j in range(2)])
+                        bondcoeff.append([float(line.split()[j + 2]) for j in range(3)])
                 else:
                     print('Unrecognized bond type')
             if key == 'fix':

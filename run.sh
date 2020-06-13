@@ -36,7 +36,7 @@ cd screening
 #a=""; for x in $(find . -name "dct.dat"); do a=$a" "$x; done; echo $a;
 #b=""; for x in $(find . -name "eig.dat"); do a=$a" "$x; done; echo $a;
 
-for m in morse; do
+for m in lennard-jones; do
 
 	rm -rf $m
 	mkdir $m
