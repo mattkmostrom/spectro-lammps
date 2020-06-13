@@ -206,7 +206,7 @@ re_dict_sysvals = {
     'dump': re.compile(r'^dump\s+[A-z]+\s+[A-z]+\s+[A-z]+\s+(?P<dump>\d+\s+[_A-z.\d]+)'),
     'bond_style': re.compile(r'^bond_style\s+(?P<bond_style>[A-z]+)'),
     'logfile': re.compile(r'^log\s+(?P<logfile>[_A-z.\d]+)'),
-    'inm': re.compile(r'^#inm\s+(?P<inm>[_A-z.\d]+\s+\d+)'),
+    'inm': re.compile(r'^inm\s+(?P<inm>[_A-z.\d]+\s+\d+)'),
     'reps': re.compile(r'^replicate\s+(?P<reps>\d+\s+\d+\s+\d+)'),
     'fix': re.compile(r'^fix\s+[_A-z\d]+\s+[_A-z\d]+\s+(?P<fix>[A-z]+)')
 }
@@ -215,6 +215,7 @@ sysvals_lst = ['dt', 'initfile', 'bond_style', 'idump', 'dumpfile', 'ithermo', '
 
 
 def readsysvals(infile):
+    print(infile)
     with open(infile, 'r') as f:
         data = [-1] * 10
         bondcoeff = []
@@ -222,6 +223,9 @@ def readsysvals(infile):
         line = f.readline()
         while line:
             key, match = parse_line(line, re_dict_sysvals)
+            print(line)
+            print(key)
+            print(match)
             if match:
                 val = match.group(key)
             if key == 'nsteps':

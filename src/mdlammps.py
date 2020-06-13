@@ -137,7 +137,8 @@ teng = mdoutput.write_thermo(logfile,0,natoms,masses,pos,vel,pot)
 itime = 1
 tnow = time.time()
 ttime = tnow
-tol = 1e-8
+# tol = 1e-8
+tol = 1e-4
 dump_vel = 5
 
 print("Running dynamics")
