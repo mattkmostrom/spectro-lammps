@@ -1,7 +1,7 @@
 # spectro-lammps
 
 This is a code written primarily by Matthew Mostrom, Andres Saez, and Dr. Preston Moore in Python for the purpose of using classical dynamics to characterize
-spectroscopic phenomena of molecular systems. Input currently is made to
+spectroscopic phenomena of molecular systems. It is a work in progress and still has places where it breaks or could be improved, but was meant to be a toy problem/tool to look at computational spectroscopy. Input currently is made to
 resemble LAMMPS input scripts for the purpose of being able to quickly and
 easily check the validity of our results with the folks at Sandia for any system
 we care to look at.
